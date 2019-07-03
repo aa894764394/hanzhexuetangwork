@@ -30,32 +30,37 @@ public:
 		delete[] a;
 	}
 
+	void Dilatation(int val)
+	{
+		int* b = a;
+		CapVal = 2 * CapVal;
+		a = new int[CapVal];
+
+
+		for (int i = 0;i < num;i++)
+		{
+			a[i] = b[i];
+		}
+
+		if (m.size() > 0)
+		{
+			for (int i = num - 1;i >= 0;--i)
+			{
+				m[i + 1] = m[i];
+			}
+		}
+
+		a[num] = val;
+		m[0] = num;
+		++num;
+		delete[] b;
+	}
+
 	void AddFirst(int val)
 	{
 		if (num==CapVal)
 		{
-			int* b = a;
-			CapVal = 2 * CapVal;
-			a = new int[CapVal];
-
-			
-			for (int i = 0;i < num;i++)
-			{
-				a[i] = b[i];
-			}
-
-			if (m.size() > 0)
-			{
-				for (int i = num-1;i >= 0;--i)
-				{
-					m[i + 1] = m[i];
-				}
-			}
-
-			a[num] = val;
-			m[0] = num;
-			++num;
-			delete[] b;
+			Dilatation(val);
 		}
 		else
 		{
@@ -78,19 +83,7 @@ public:
 	{
 		if (num == CapVal)
 		{
-			int* b = a;
-			CapVal = 2 * CapVal;
-			a = new int[CapVal];
-
-
-			for (int i = 0;i < num;i++)
-			{
-				a[i] = b[i];
-			}
-			a[num] = val;			
-			m[num] = num;
-			++num;
-			delete[] b;
+			Dilatation(val);
 		}
 		else
 		{
